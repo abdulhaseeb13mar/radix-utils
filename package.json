@@ -25,16 +25,16 @@
     "validators",
     "staking"
   ],
-  "author": "",
+  "author": "Haseeb",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/abdulhaseeb13mar/radix-utils.git"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/abdulhaseeb13mar/radix-utils/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/abdulhaseeb13mar/radix-utils#readme",
   "dependencies": {
     "@radixdlt/babylon-gateway-api-sdk": "^1.6.0",
     "decimal.js": "^10.4.3"
