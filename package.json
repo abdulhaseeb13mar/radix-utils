@@ -1,0 +1,56 @@
+{
+  "name": "radix-utils",
+  "version": "1.1.0",
+  "description": "Utility functions for Radix DLT blockchain development",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts",
+    "prepublishOnly": "npm run build",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "radix",
+    "radixdlt",
+    "blockchain",
+    "crypto",
+    "utilities",
+    "validators",
+    "staking"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+    "@radixdlt/babylon-gateway-api-sdk": "^1.6.0",
+    "decimal.js": "^10.4.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.6.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
