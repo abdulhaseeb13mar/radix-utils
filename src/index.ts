@@ -5,6 +5,11 @@ export * from './types';
 export { BN, retryPromiseAll } from './utils/decimal';
 export { calculateEstimatedUnlockDate } from './utils/date';
 export { fetchWalletBalances } from './utils/wallet';
+export {
+  getEventFromTransaction,
+  getEventKeyValuesFromTransaction,
+  extractValuesFromTxEvent,
+} from './utils/transaction';
 
 // Export validator functions
 export {

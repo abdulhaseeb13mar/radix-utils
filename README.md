@@ -177,6 +177,73 @@ Executes Promise.all with retry logic and exponential backoff.
 
 **Returns:** `Promise<T[]>`
 
+### Transaction Functions
+
+#### `getEventFromTransaction(gatewayApi, txId, eventName)`
+
+Extracts a specific event from a transaction's detailed events.
+
+**Parameters:**
+
+- `gatewayApi`: GatewayApiClient instance
+- `txId`: String - Transaction intent hash
+- `eventName`: String - Name of the event to extract
+
+**Returns:** `Promise<DetailedEventsItem>`
+
+**Example:**
+
+```typescript
+const event = await getEventFromTransaction(
+  gatewayApi,
+  'txid_rdx1...',
+  'WithdrawEvent'
+);
+console.log('Event data:', event);
+```
+
+#### `getEventKeyValuesFromTransaction(gatewayApi, txId, eventName)`
+
+Extracts key-value pairs from a specific event in a transaction.
+
+**Parameters:**
+
+- `gatewayApi`: GatewayApiClient instance
+- `txId`: String - Transaction intent hash
+- `eventName`: String - Name of the event to extract
+
+**Returns:** `Promise<Record<string, string>>`
+
+**Example:**
+
+```typescript
+const keyValues = await getEventKeyValuesFromTransaction(
+  gatewayApi,
+  'txid_rdx1...',
+  'TransferEvent'
+);
+console.log('Amount:', keyValues.amount);
+console.log('Recipient:', keyValues.recipient);
+```
+
+#### `extractValuesFromTxEvent(event)`
+
+Extracts key-value pairs from a transaction event's fields.
+
+**Parameters:**
+
+- `event`: DetailedEventsItem - The event object to extract values from
+
+**Returns:** `Record<string, string>`
+
+**Example:**
+
+```typescript
+const event = await getEventFromTransaction(gatewayApi, txId, 'MyEvent');
+const values = extractValuesFromTxEvent(event);
+console.log('Extracted values:', values);
+```
+
 ## TypeScript Types
 
 The library exports comprehensive TypeScript types:
@@ -263,6 +330,15 @@ MIT License - see LICENSE file for details.
 For issues and feature requests, please use the GitHub issue tracker.
 
 ## Changelog
+
+### 1.2.0
+
+- Added transaction event handling utilities
+- Added `getEventFromTransaction` function for extracting specific events from transactions
+- Added `getEventKeyValuesFromTransaction` function for simplified key-value extraction
+- Added `extractValuesFromTxEvent` function for parsing event field data
+- Added comprehensive test coverage for transaction functionality
+- Updated documentation with transaction utility examples
 
 ### 1.1.0
 
