@@ -324,7 +324,7 @@ export const fetchValidatorInfo = async (
  * @returns A mapping of non-fungible id to its unstake claim data (includes `nftId`, optional `claim_amount`, and optional `claim_epoch`).
  * @throws Propagates any errors thrown by the gateway API calls (e.g., network or parsing errors).
  */
-export const fetchUnstakeCLaimNFTData = async (
+export const fetchUnstakeClaimNFTData = async (
   gatewayApi: GatewayApiClient,
   claimNFTAddress: string,
   nftIds: string[]
@@ -360,7 +360,7 @@ export const fetchUnstakeCLaimNFTData = async (
 
     return unstakeClaimNFTsData;
   } catch (error) {
-    console.error('Error in fetchUnstakeCLaimNFTData', error);
+    console.error('Error in fetchUnstakeClaimNFTData', error);
     throw error;
   }
 };

@@ -1,4 +1,4 @@
-import { fetchUnstakeCLaimNFTData } from '../validators';
+import { fetchUnstakeClaimNFTData } from '../validators';
 import type { GatewayApiClient } from '@radixdlt/babylon-gateway-api-sdk';
 
 describe('Validator utilities', () => {
@@ -42,7 +42,7 @@ describe('Validator utilities', () => {
       },
     ]);
 
-    const result = await fetchUnstakeCLaimNFTData(
+    const result = await fetchUnstakeClaimNFTData(
       gatewayApi,
       'resource_claim',
       ['#1#', '#2#']
@@ -93,7 +93,7 @@ describe('Validator utilities', () => {
         },
       ]);
 
-    const result = await fetchUnstakeCLaimNFTData(
+    const result = await fetchUnstakeClaimNFTData(
       gatewayApi,
       'resource_claim',
       nftIds
@@ -135,7 +135,7 @@ describe('Validator utilities', () => {
       },
     ]);
 
-    const result = await fetchUnstakeCLaimNFTData(
+    const result = await fetchUnstakeClaimNFTData(
       gatewayApi,
       'resource_claim',
       ['#1#']

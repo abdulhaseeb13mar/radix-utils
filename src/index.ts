@@ -16,7 +16,7 @@ export {
   fetchValidatorInfo,
   checkResourceInUsersFungibleAssets,
   computeValidatorFeeFactor,
-  fetchUnstakeCLaimNFTData,
+  fetchUnstakeClaimNFTData,
 } from './validators';
 
 // Re-export commonly used types for convenience
