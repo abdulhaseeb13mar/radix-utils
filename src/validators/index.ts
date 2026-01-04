@@ -12,7 +12,9 @@ import {
   NewFeeFactor,
   FeeFactor,
   ResourceCheckResult,
+  UnstakeClaimNFTData,
 } from '../types';
+import { chunkArray } from '../utils/misc';
 
 /**
  * Extract metadata from EntityMetadataCollection
@@ -311,4 +313,54 @@ export const fetchValidatorInfo = async (
   }
 
   return undefined;
+};
+
+/**
+ * Fetches programmatic fields for a set of unstake-claim NFTs and returns them keyed by NFT id.
+ *
+ * @param gatewayApi - Gateway API client used to fetch non-fungible data.
+ * @param claimNFTAddress - Address of the claim NFT resource/collection.
+ * @param nftIds - Array of non-fungible ids to fetch.
+ * @returns A mapping of non-fungible id to its unstake claim data (includes `nftId`, optional `claim_amount`, and optional `claim_epoch`).
+ * @throws Propagates any errors thrown by the gateway API calls (e.g., network or parsing errors).
+ */
+export const fetchUnstakeCLaimNFTData = async (
+  gatewayApi: GatewayApiClient,
+  claimNFTAddress: string,
+  nftIds: string[]
+): Promise<UnstakeClaimNFTData> => {
+  try {
+    const nftIdsChunks = chunkArray<string>(nftIds, 100);
+    const chunkPromises = nftIdsChunks.map((nftIdsChunk) =>
+      gatewayApi.state.getNonFungibleData(claimNFTAddress, nftIdsChunk)
+    );
+
+    const chunkData = (await Promise.all(chunkPromises)).flat();
+
+    const unstakeClaimNFTsData: UnstakeClaimNFTData = {};
+
+    chunkData.forEach((nftData) => {
+      const programmatic_json = nftData.data?.programmatic_json;
+      if (programmatic_json?.kind === 'Tuple') {
+        const nftEntry = unstakeClaimNFTsData[nftData.non_fungible_id] || {};
+        nftEntry.nftId = nftData.non_fungible_id;
+        programmatic_json.fields.forEach((field) => {
+          if (field.kind === 'Decimal' && field.field_name === 'claim_amount') {
+            nftEntry.claim_amount = field.value;
+          } else if (
+            field.kind === 'U64' &&
+            field.field_name === 'claim_epoch'
+          ) {
+            nftEntry.claim_epoch = field.value;
+          }
+        });
+        unstakeClaimNFTsData[nftData.non_fungible_id] = nftEntry;
+      }
+    });
+
+    return unstakeClaimNFTsData;
+  } catch (error) {
+    console.error('Error in fetchUnstakeCLaimNFTData', error);
+    throw error;
+  }
 };

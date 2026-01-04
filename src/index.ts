@@ -16,6 +16,7 @@ export {
   fetchValidatorInfo,
   checkResourceInUsersFungibleAssets,
   computeValidatorFeeFactor,
+  fetchUnstakeCLaimNFTData,
 } from './validators';
 
 // Re-export commonly used types for convenience
@@ -33,4 +34,5 @@ export type {
   NonFungibleBalances,
   FungibleBalance,
   NonFungibleBalance,
+  UnstakeClaimNFTData,
 } from './types';

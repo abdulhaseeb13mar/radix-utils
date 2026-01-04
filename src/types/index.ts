@@ -108,3 +108,12 @@ export interface WalletBalances {
   fungible: FungibleBalances;
   nonFungible: NonFungibleBalances;
 }
+
+export type UnstakeClaimNFTData = Record<
+  string,
+  {
+    nftId: string;
+    claim_amount: string;
+    claim_epoch: string;
+  }
+>;
